@@ -1,0 +1,23 @@
+---
+name: renovate
+
+on:
+  workflow_call:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Renovate
+        uses: renovatebot/github-action@v44.2.3
+        env:
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
