@@ -7,6 +7,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: pr-${{ github.repository }}-${{ github.event.pull_request.number }}-checks
+  cancel-in-progress: true
+
 jobs:
   run:
     runs-on: ubuntu-latest
