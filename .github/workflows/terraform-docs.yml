@@ -3,10 +3,12 @@ name: terraform-docs
 
 on:
   workflow_call:
+    secrets:
+      AUTOMATION_PAT:
+        required: true
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   run:
@@ -16,6 +18,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.AUTOMATION_PAT }}
 
       - uses: terraform-docs/gh-actions@v1
         with:

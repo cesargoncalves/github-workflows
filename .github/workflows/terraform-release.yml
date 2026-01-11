@@ -3,10 +3,12 @@ name: terraform-release
 
 on:
   workflow_call:
+    secrets:
+      AUTOMATION_PAT:
+        required: true
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   run:
@@ -15,5 +17,5 @@ jobs:
       - name: Release
         uses: googleapis/release-please-action@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.AUTOMATION_PAT }}
           release-type: terraform-module
