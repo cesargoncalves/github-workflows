@@ -1,5 +1,5 @@
 ---
-name: terraform-release
+name: ansible-release
 
 on:
   workflow_call:
@@ -22,4 +22,10 @@ jobs:
         uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.AUTOMATION_PAT }}
-          release-type: terraform-module
+          release-type: simple
+
+      - name: Install dependencies
+        run: pip3 install ansible-core
+
+      - name: Import role into Galaxy
+        run: ansible-galaxy role import --api-key ${{ secrets.GALAXY_API_KEY }} $(echo ${{ github.repository }} | cut -d/ -f1) $(echo ${{ github.repository }} | cut -d/ -f2)

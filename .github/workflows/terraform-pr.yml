@@ -48,7 +48,7 @@ jobs:
           tflint --init
           tflint
 
-      - name: terraform-docs (update README + commit)
+      - name: Update README + commit
         uses: terraform-docs/gh-actions@v1
         with:
           working-dir: .
