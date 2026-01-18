@@ -7,11 +7,8 @@ on:
       AUTOMATION_PAT:
         required: true
 
-permissions:
-  contents: read
-
 concurrency:
-  group: release-${{ github.repository }}-${{ github.event.pull_request.number }}
+  group: release-${{ github.repository }}
   cancel-in-progress: true
 
 jobs:
